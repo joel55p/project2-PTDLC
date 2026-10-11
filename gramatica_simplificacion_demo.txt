@@ -1,0 +1,14 @@
+# Gramática de prueba para verificar simplificación completa a CNF
+# Contiene:
+# 1. Producciones epsilon (A -> epsilon)
+# 2. Producciones unitarias (S -> B, B -> C)
+# 3. Símbolos no generadores (U -> U a)
+# 4. Símbolos inalcanzables (Z -> a)
+# 5. Cuerpos largos con terminales mezclados (S -> a B c d)
+
+S -> a B c d | A B | B
+A -> a A | epsilon
+B -> C | b
+C -> c
+U -> U a
+Z -> a b

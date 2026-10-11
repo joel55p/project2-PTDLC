@@ -1,0 +1,42 @@
+# Frases de prueba para el Algoritmo CYK - Proyecto 2
+# Líneas que inician con '#' o vacías son ignoradas
+
+# --- Frases VÁLIDAS en el lenguaje (según la gramática del PDF) ---
+# Ejemplos explícitos del PDF:
+She eats a cake with a fork
+The cat drinks the beer
+
+# Otras derivaciones válidas:
+He cuts the meat with a knife
+A dog drinks the beer
+She cooks the soup in the oven
+He drinks the juice with a spoon
+The dog eats a cake
+She eats the meat with a fork
+The cat drinks a juice
+He drinks in the oven
+She eats with a fork
+She eats
+He cooks
+
+# --- Frases INVÁLIDAS (que NO pertenecen al lenguaje) ---
+# Falta determinante en sustantivos (la gramática exige NP -> Det N):
+He cuts meat with a knife
+Cat drinks the beer
+Cake eats a dog
+Beer drinks a cat
+
+# Orden sintáctico incorrecto:
+She eats beer the fork
+The drinks cake cat
+She with a fork eats cake
+drinks the beer
+with a fork she eats
+
+# Preposiciones consecutivas o sin sustantivo:
+He cuts with in fork
+He cuts in with a knife
+
+# Palabras no reconocidas por el léxico:
+The dog sleeps in the oven
+A banana drinks the tea

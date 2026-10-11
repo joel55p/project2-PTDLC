@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CYK Parser — Reporte de Validación</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+            margin: 0;
+            padding: 30px 20px;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px 28px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+        }
+        h1 {
+            margin-top: 0;
+            color: #1e1b4b;
+            font-size: 1.8rem;
+        }
+        h2 {
+            color: #312e81;
+            margin-top: 0;
+            border-bottom: 2px solid #e0e7ff;
+            padding-bottom: 8px;
+            font-size: 1.3rem;
+        }
+        .badge-bar {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+        .metric-pill {
+            background: #f1f5f9;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            color: #334155;
+            font-weight: 500;
+        }
+        .table-responsive {
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+        table.matrix {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+        table.matrix th, table.matrix td {
+            min-width: 80px;
+            height: 40px;
+        }
+        .code-box {
+            background: #0f172a;
+            color: #f8fafc;
+            padding: 16px;
+            border-radius: 8px;
+            font-family: Consolas, Monaco, "Courier New", monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+        }
+        footer {
+            text-align: center;
+            color: #94a3b8;
+            font-size: 0.85rem;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h1>Cocke-Younger-Kasami (CYK) — Reporte de Análisis Sintáctico</h1>
+            <p style="font-size: 1.15rem; color: #475569; margin-bottom: 10px;">
+                Expresión: <strong style="color: #0f172a;">"The cat drinks the beer"</strong>
+            </p>
+            <div class="badge-bar">
+                <span style="background: #10b981; color: white; padding: 6px 16px; border-radius: 20px; font-weight: bold; font-size: 1.1rem;">SÍ (Aceptada)</span>
+                <div class="metric-pill">⏱️ Tiempo de validación: <strong>0.1076 ms</strong> (107.6 µs)</div>
+                <div class="metric-pill">🔤 Longitud: <strong>5 palabras</strong></div>
+                <div class="metric-pill">🎯 Símbolo inicial: <strong>S</strong></div>
+            </div>
+        </div>
+
+        
+        <div class="card">
+            <h2>🌳 Árbol Sintáctico (Parse Tree)</h2>
+            <p>Se encontraron <strong>1</strong> árbol(es) de derivación sintáctica válidos.</p>
+            <div style="overflow-x: auto; padding: 15px 0; border: 1px solid #e2e8f0; border-radius: 8px; margin-bottom: 20px;">
+                <svg viewBox="0 0 800 410" width="100%" style="min-width: 600px; max-height: 600px; background: #ffffff; border-radius: 8px;">
+<path d="M 232.5 65 C 232.5 95, 120.0 85, 120.0 115" stroke="#4f46e5" stroke-width="2" fill="none" opacity="0.6"/>
+<path d="M 120.0 145 C 120.0 175, 70 165, 70 195" stroke="#4f46e5" stroke-width="2" fill="none" opacity="0.6"/>
+<rect x="30" y="192" width="80" height="36" rx="6" fill="#ecfdf5" stroke="#10b981" stroke-width="2"/>
+<text x="70" y="214" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" fill="#065f46" text-anchor="middle">Det</text>
+<text x="70" y="242" font-family="system-ui, sans-serif" font-size="12" font-style="italic" fill="#047857" text-anchor="middle">"the"</text>
+<path d="M 120.0 145 C 120.0 175, 170 165, 170 195" stroke="#4f46e5" stroke-width="2" fill="none" opacity="0.6"/>
+<rect x="130" y="192" width="80" height="36" rx="6" fill="#ecfdf5" stroke="#10b981" stroke-width="2"/>
+<text x="170" y="214" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" fill="#065f46" text-anchor="middle">N</text>
+<text x="170" y="242" font-family="system-ui, sans-serif" font-size="12" font-style="italic" fill="#047857" text-anchor="middle">"cat"</text>
+<rect x="85.0" y="112" width="70" height="36" rx="6" fill="#eef2ff" stroke="#6366f1" stroke-width="2"/>
+<text x="120.0" y="135" font-family="system-ui, sans-serif" font-size="14" font-weight="bold" fill="#3730a3" text-anchor="middle">NP</text>
+<path d="M 232.5 65 C 232.5 95, 345.0 85, 345.0 115" stroke="#4f46e5" stroke-width="2" fill="none" opacity="0.6"/>
+<path d="M 345.0 145 C 345.0 175, 270 165, 270 195" stroke="#4f46e5" stroke-width="2" fill="none" opacity="0.6"/>
+<rect x="230" y="192" width="80" height="36" rx="6" fill="#ecfdf5" stroke="#10b981" stroke-width="2"/>
+<text x="270" y="214" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" fill="#065f46" text-anchor="middle">V</text>
+<text x="270" y="242" font-family="system-ui, sans-serif" font-size="12" font-style="italic" fill="#047857" text-anchor="middle">"drinks"</text>
+<path d="M 345.0 145 C 345.0 175, 420.0 165, 420.0 195" stroke="#4f46e5" stroke-width="2" fill="none" opacity="0.6"/>
+<path d="M 420.0 225 C 420.0 255, 370 245, 370 275" stroke="#4f46e5" stroke-width="2" fill="none" opacity="0.6"/>
+<rect x="330" y="272" width="80" height="36" rx="6" fill="#ecfdf5" stroke="#10b981" stroke-width="2"/>
+<text x="370" y="294" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" fill="#065f46" text-anchor="middle">Det</text>
+<text x="370" y="322" font-family="system-ui, sans-serif" font-size="12" font-style="italic" fill="#047857" text-anchor="middle">"the"</text>
+<path d="M 420.0 225 C 420.0 255, 470 245, 470 275" stroke="#4f46e5" stroke-width="2" fill="none" opacity="0.6"/>
+<rect x="430" y="272" width="80" height="36" rx="6" fill="#ecfdf5" stroke="#10b981" stroke-width="2"/>
+<text x="470" y="294" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" fill="#065f46" text-anchor="middle">N</text>
+<text x="470" y="322" font-family="system-ui, sans-serif" font-size="12" font-style="italic" fill="#047857" text-anchor="middle">"beer"</text>
+<rect x="385.0" y="192" width="70" height="36" rx="6" fill="#eef2ff" stroke="#6366f1" stroke-width="2"/>
+<text x="420.0" y="215" font-family="system-ui, sans-serif" font-size="14" font-weight="bold" fill="#3730a3" text-anchor="middle">NP</text>
+<rect x="310.0" y="112" width="70" height="36" rx="6" fill="#eef2ff" stroke="#6366f1" stroke-width="2"/>
+<text x="345.0" y="135" font-family="system-ui, sans-serif" font-size="14" font-weight="bold" fill="#3730a3" text-anchor="middle">VP</text>
+<rect x="197.5" y="32" width="70" height="36" rx="6" fill="#eef2ff" stroke="#6366f1" stroke-width="2"/>
+<text x="232.5" y="55" font-family="system-ui, sans-serif" font-size="14" font-weight="bold" fill="#3730a3" text-anchor="middle">S</text>
+</svg>
+            </div>
+            <h3>Notación Penn Treebank / Corchetes:</h3>
+            <pre class="code-box">[S [NP [Det the] [N cat]] [VP [V drinks] [NP [Det the] [N beer]]]]</pre>
+            <details style="margin-top: 15px;">
+                <summary style="cursor: pointer; color: #4f46e5; font-weight: 600;">Ver Árbol en formato ASCII Textual</summary>
+                <pre class="code-box" style="margin-top: 10px;">└── S
+    ├── NP
+    │   ├── Det ("the")
+    │   └── N ("cat")
+    └── VP
+        ├── V ("drinks")
+        └── NP
+            ├── Det ("the")
+            └── N ("beer")</pre>
+            </details>
+        </div>
+        
+
+        <div class="card">
+            <h2>📐 Matriz Triangular de Programación Dinámica (CYK Table)</h2>
+            <p>Eje vertical: longitud de subcadena (<strong>l</strong>). Eje horizontal: índice de inicio (<strong>i</strong>). La celda superior (l=5, i=0) determina la aceptación con el símbolo <strong>S</strong>.</p>
+            <div class="table-responsive">
+                <table class="matrix">
+                    <thead>
+                        <tr><th style='background:#0f172a; color:white; padding:10px;'>l \ i</th><th style='background:#1e293b; color:white; padding:10px;'>i=0<br><small style='color:#94a3b8;'>"the"</small></th><th style='background:#1e293b; color:white; padding:10px;'>i=1<br><small style='color:#94a3b8;'>"cat"</small></th><th style='background:#1e293b; color:white; padding:10px;'>i=2<br><small style='color:#94a3b8;'>"drinks"</small></th><th style='background:#1e293b; color:white; padding:10px;'>i=3<br><small style='color:#94a3b8;'>"the"</small></th><th style='background:#1e293b; color:white; padding:10px;'>i=4<br><small style='color:#94a3b8;'>"beer"</small></th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td style='background:#f1f5f9; font-weight:bold; text-align:center;'>l = 5</td><td style='background:#ecfdf5; border: 1px solid #10b981; color: #047857; text-align:center; padding: 10px; font-weight: 600;'>{S}</td><td style='background:#f8fafc; border:none;'></td><td style='background:#f8fafc; border:none;'></td><td style='background:#f8fafc; border:none;'></td><td style='background:#f8fafc; border:none;'></td></tr><tr><td style='background:#f1f5f9; font-weight:bold; text-align:center;'>l = 4</td><td style='background:#ffffff; border: 1px solid #cbd5e1; color: #1e293b; text-align:center; padding: 10px; font-weight: 600;'>∅</td><td style='background:#ffffff; border: 1px solid #cbd5e1; color: #1e293b; text-align:center; padding: 10px; font-weight: 600;'>∅</td><td style='background:#f8fafc; border:none;'></td><td style='background:#f8fafc; border:none;'></td><td style='background:#f8fafc; border:none;'></td></tr><tr><td style='background:#f1f5f9; font-weight:bold; text-align:center;'>l = 3</td><td style='background:#f8fafc; border: 1px solid #cbd5e1; color: #1e293b; text-align:center; padding: 10px; font-weight: 600;'>{S}</td><td style='background:#ffffff; border: 1px solid #cbd5e1; color: #1e293b; text-align:center; padding: 10px; font-weight: 600;'>∅</td><td style='background:#f8fafc; border: 1px solid #cbd5e1; color: #1e293b; text-align:center; padding: 10px; font-weight: 600;'>{VP}</td><td style='background:#f8fafc; border:none;'></td><td style='background:#f8fafc; border:none;'></td></tr><tr><td style='background:#f1f5f9; font-weight:bold; text-align:center;'>l = 2</td><td style='background:#f8fafc; border: 1px solid #cbd5e1; color: #1e293b; text-align:center; padding: 10px; font-weight: 600;'>{NP}</td><td style='background:#ffffff; border: 1px solid #cbd5e1; color: #1e293b; text-align:center; padding: 10px; font-weight: 600;'>∅</td><td style='background:#ffffff; border: 1px solid #cbd5e1; color: #1e293b; text-align:center; padding: 10px; font-weight: 600;'>∅</td><td style='background:#f8fafc; border: 1px solid #cbd5e1; color: #1e293b; text-align:center; padding: 10px; font-weight: 600;'>{NP}</td><td style='background:#f8fafc; border:none;'></td></tr><tr><td style='background:#f1f5f9; font-weight:bold; text-align:center;'>l = 1</td><td style='background:#f8fafc; border: 1px solid #cbd5e1; color: #1e293b; text-align:center; padding: 10px; font-weight: 600;'>{Det}</td><td style='background:#f8fafc; border: 1px solid #cbd5e1; color: #1e293b; text-align:center; padding: 10px; font-weight: 600;'>{N}</td><td style='background:#f8fafc; border: 1px solid #cbd5e1; color: #1e293b; text-align:center; padding: 10px; font-weight: 600;'>{V, VP}</td><td style='background:#f8fafc; border: 1px solid #cbd5e1; color: #1e293b; text-align:center; padding: 10px; font-weight: 600;'>{Det}</td><td style='background:#f8fafc; border: 1px solid #cbd5e1; color: #1e293b; text-align:center; padding: 10px; font-weight: 600;'>{N}</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>📋 Gramática Utilizada (Forma Normal de Chomsky)</h2>
+            <pre class="code-box">S -> NP VP
+Det -> a | the
+N -> cat | dog | beer | cake | juice | meat | soup | fork | knife | oven | spoon
+NP -> Det N | he | she
+P -> in | with
+PP -> P NP
+V -> cooks | drinks | eats | cuts
+VP -> VP PP | V NP | cooks | drinks | eats | cuts</pre>
+        </div>
+
+        <footer>
+            Teoría de la Computación — Proyecto 2 — Algoritmo CYK y Simplificación de Gramáticas
+        </footer>
+    </div>
+</body>
+</html>
